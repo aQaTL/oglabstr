@@ -111,37 +111,37 @@ func (s *Shader) getUniformLocation(name string) int32 {
 	return location
 }
 
-func (s *Shader) SetUniform3fv(name string, vec3 mgl32.Vec3) {
+func (s *Shader) SetVec3(name string, vec3 mgl32.Vec3) {
 	s.Bind()
 	gl.Uniform3fv(s.getUniformLocation(name), 1, &vec3[0])
 }
 
-func (s *Shader) SetUniform4fv(name string, vec4 mgl32.Vec4) {
+func (s *Shader) SetVec4(name string, vec4 mgl32.Vec4) {
 	s.Bind()
 	gl.Uniform4fv(s.getUniformLocation(name), 1, &vec4[0])
 }
 
-func (s *Shader) SetUniform1i(name string, value int32) {
+func (s *Shader) SetInt(name string, value int32) {
 	s.Bind()
 	gl.Uniform1i(s.getUniformLocation(name), value)
 }
 
-func (s *Shader) SetUniformMat4fv(name string, mat mgl32.Mat4, transpose bool) {
+func (s *Shader) SetMat4(name string, mat mgl32.Mat4, transpose bool) {
 	s.Bind()
 	gl.UniformMatrix4fv(s.getUniformLocation(name), 1, transpose, &mat[0])
 }
 
-func (s *Shader) SetUniformMat3fv(name string, mat mgl32.Mat3, transpose bool) {
+func (s *Shader) SetMat3(name string, mat mgl32.Mat3, transpose bool) {
 	s.Bind()
 	gl.UniformMatrix3fv(s.getUniformLocation(name), 1, transpose, &mat[0])
 }
 
-func (s *Shader) SetUniform1f(name string, v0 float32) {
+func (s *Shader) SetFloat(name string, v0 float32) {
 	s.Bind()
 	gl.Uniform1f(s.getUniformLocation(name), v0)
 }
 
-func (s *Shader) SetUniform3f(name string, v0, v1, v2 float32) {
+func (s *Shader) SetFloat3(name string, v0, v1, v2 float32) {
 	s.Bind()
 	gl.Uniform3f(s.getUniformLocation(name), v0, v1, v2)
 }
