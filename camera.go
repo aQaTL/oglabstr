@@ -26,6 +26,9 @@ type Camera struct {
 	MovementSpeed float32
 	Sensitivity   float32
 	Zoom          float32
+
+	//For perspective projection
+	Near, Far float32
 }
 
 func NewCamera(position mgl32.Vec3) *Camera {
@@ -40,6 +43,9 @@ func NewCamera(position mgl32.Vec3) *Camera {
 	c.MovementSpeed = 2.5
 	c.Sensitivity = 0.1
 	c.Zoom = 45.0
+
+	c.Near = 0.1
+	c.Far = 100.0
 
 	c.updateVectors()
 

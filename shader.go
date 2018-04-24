@@ -6,6 +6,7 @@ import (
 	"github.com/go-gl/mathgl/mgl32"
 	"os"
 	"strings"
+	"io/ioutil"
 )
 
 type Shader struct {
@@ -13,7 +14,10 @@ type Shader struct {
 	locationCache map[string]int32
 }
 
-func NewShaderProgram(vertexShaderSource, fragmentShaderSource string) (*Shader, error) {
+func NewShaderProgram(vertexShaderPath, fragmentShaderPath string) (*Shader, error) {
+	vertexShaderSource := loadFile(vertexShaderPath)
+	fragmentShaderSource := loadFile(fragmentShaderPath)
+
 	vertexShader, err := compileShader(vertexShaderSource, gl.VERTEX_SHADER)
 	if err != nil {
 		return nil, err
@@ -46,6 +50,14 @@ func NewShaderProgram(vertexShaderSource, fragmentShaderSource string) (*Shader,
 	gl.DeleteShader(fragmentShader)
 
 	return &Shader{program, make(map[string]int32)}, nil
+}
+
+func loadFile(fileName string) string {
+	bytes, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		panic(err)
+	}
+	return string(bytes)
 }
 
 func compileShader(source string, shaderType uint32) (uint32, error) {

@@ -14,7 +14,6 @@ func CreateWindow(width, height int, title string) *glfw.Window {
 	if err := glfw.Init(); err != nil {
 		panic(err)
 	}
-	//defer glfw.Terminate()
 
 	glfw.WindowHint(glfw.Resizable, glfw.True)
 	glfw.WindowHint(glfw.ContextVersionMajor, 4)
@@ -50,6 +49,10 @@ func CreateWindow(width, height int, title string) *glfw.Window {
 	gl.DepthFunc(gl.LESS)
 	gl.Enable(gl.BLEND)
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+
+	gl.Enable(gl.STENCIL_TEST)
+	gl.StencilFunc(gl.NOTEQUAL, 1, 0xFF)
+	gl.StencilOp(gl.KEEP, gl.KEEP, gl.REPLACE)
 
 	return win
 }
